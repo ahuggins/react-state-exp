@@ -1,9 +1,15 @@
-import { createStore } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension';
-import counterReducer from './redux/counter';
+import { configureStore } from '@reduxjs/toolkit';
+import counterReducer from './redux/counter'
 
 
-let store = createStore(counterReducer, composeWithDevTools());
+
+let store = configureStore({
+    devTools: true,
+    reducer: {
+        counter: counterReducer,
+    }
+})
+
 
 
 export default store;
