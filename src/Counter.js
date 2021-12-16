@@ -1,10 +1,12 @@
 import { useState } from 'react';
 
-import { connect } from 'react-redux';
-import { increment, decrement } from './redux/counter';
+import useStore from './store';
 
-function Counter({ count, increment, decrement }) {
+export default function Counter() {
     const [changeBy, setChangeBy] = useState(1);
+    const count = useStore(state => state.count);
+    const increment = useStore(state => state.increment);
+    const decrement = useStore(state => state.decrement);
   return <>
     {count}
       <div>
@@ -19,10 +21,3 @@ function Counter({ count, increment, decrement }) {
 
     </>
 }
-
-export default connect(state => ({
-    count: state.count,
-}), dispatch => ({
-    increment: val => dispatch(increment(val)),
-    decrement: val => dispatch(decrement(val)),
-}))(Counter)
