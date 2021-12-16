@@ -1,9 +1,10 @@
-import { createStore } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension';
-import counterReducer from './redux/counter';
+import create from 'zustand'
+import { devtools } from 'zustand/middleware';
 
+let useStore = create(devtools(set => ({
+    count: 0,
+    increment: val => set(state => ({ count: state.count + val })),
+    decrement: val => set(state => ({ count: state.count - val })),
+})))
 
-let store = createStore(counterReducer, composeWithDevTools());
-
-
-export default store;
+export default useStore;
